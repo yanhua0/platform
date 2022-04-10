@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="container">
-    <h2>服务器管理</h2>
+    <h2>测试工具管理</h2>
     <div class="panel panel-primary">
 
         <div class="panel-body">
@@ -27,25 +27,21 @@
                 <thead>
                 <tr>
                     <th>No.</th>
-                    <th>服务器名称</th>
-                    <th>IP地址</th>
-                    <th>服务器状态</th>
-                    <th>操作系统</th>
+                    <th>工具名称</th>
                     <th>描述</th>
+                    <th>创建时间</th>
                     <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="server,index:${list}" class="find">
+                <tr th:each="tool,index:${list}" class="find">
                     <td th:text="${index.count}"></td>
-                    <td th:text="${server.deviceName}"></td>
-                    <td th:text="${server.ip}"></td>
-                    <td th:text="${server.serverStatus}"></td>
-                    <td th:text="${server.os}"></td>
-                    <td th:text="${server.description}"></td>
-                    <td><a th:href="'/testServer/delete/'+${server.id}" onclick='return confirm("确定删除该记录？");' >删除</a>
+                    <td th:text="${tool.toolName}"></td>
+                    <td th:text="${tool.description}"></td>
+                    <td th:text="${#dates.format(tool.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+                    <td><a th:href="'/testTool/delete/'+${tool.id}" onclick='return confirm("确定删除该记录？");' >删除</a>
                         <a href="javascript:void(0)" data-toggle="modal" data-target="#update" class="edit">修改</a>
-                        <input type="hidden" th:value="${server.id}" class="aid">
+                        <input type="hidden" th:value="${tool.id}" class="aid">
                     </td>
                 </tr>
                 </tbody>
@@ -64,41 +60,21 @@
                     &times;
                 </button>
                 <h4 class="modal-title text-center" id="myModalLabel">
-                    添加服务器
+                    添加工具
                 </h4>
 
             </div>
             <div class="modal-body">
-                <form class="form-group" action="testServer" method="post" id="form1">
+                <form class="form-group" action="testTool" method="post" id="form1">
                     <div class="form-group">
-                        <label for="">服务器名称</label>
-                        <input class="form-control" type="text" placeholder="请输入服务器名称" name="deviceName"
+                        <label for="">工具名称</label>
+                        <input class="form-control" type="text" placeholder="请输入工具名称" name="toolName"
                                required="required">
                     </div>
                     <div class="form-group">
-                        <label for="">IP地址</label>
-                        <input class="form-control" type="text" placeholder="请输入IP地址" name="ip" required="required">
-                    </div>
-                    <div class="form-group">
-                        <label for="">服务器状态</label>
-                        <select class="form-control" name="serverStatus">
-                            <option selected value="开机">开机</option>
-                            <option value="关机">关机</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="">操作系统</label>
-                        <select class="form-control" type="text" placeholder="操作系统" name="os">
-                            <option selected value="LINUX系统" tes>LINUX系统</option>
-                            <option value="WINDOWS系统">WINDOWS系统</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label for="">描述</label>
-                        <input class="form-control" name="description" type="text" placeholder="请输入描述">
+                        <input class="form-control" type="text" placeholder="请输入描述" name="description" required="required">
                     </div>
-
-
                     <div class="modal-footer">
                         <input type="submit" value="确定" class="btn btn-primary confirm">
                         <button type="button" class="btn btn-default" data-dismiss="modal">取消
@@ -124,37 +100,17 @@
                 </h4>
 
             </div>
-            <form class="form-group" action="/testServer/edit" method="POST" id="form2">
+            <form class="form-group" action="/testTool/edit" method="POST" id="form2">
                 <div class="modal-body">
-
                     <div class="form-group">
-                        <label for="">服务器名称</label>
-                        <input class="form-control" type="text" placeholder="请输入服务器名称" name="deviceName"
+                        <label for="">工具名称</label>
+                        <input class="form-control" type="text" placeholder="请输入工具名称" name="toolName"
                                required="required">
                     </div>
                     <div class="form-group">
-                        <label for="">IP地址</label>
-                        <input class="form-control" type="text" placeholder="请输入IP地址" name="ip" required="required">
-                    </div>
-                    <div class="form-group">
-                        <label for="">服务器状态</label>
-                        <select class="form-control" name="serverStatus">
-                            <option selected value="开机">开机</option>
-                            <option value="关机">关机</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="">操作系统</label>
-                        <select class="form-control" type="text" placeholder="操作系统" name="os">
-                            <option selected value="LINUX系统" tes>LINUX系统</option>
-                            <option value="WINDOWS系统">WINDOWS系统</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label for="">描述</label>
-                        <input class="form-control" name="description" type="text" placeholder="请输入描述">
+                        <input class="form-control" type="text" placeholder="请输入描述" name="description" required="required">
                     </div>
-                    <input class="form-control" name="description" type="hidden" placeholder="请输入描述">
                 </div>
                 <input type="hidden" id="editId" name="id">
                 <div class="modal-footer">

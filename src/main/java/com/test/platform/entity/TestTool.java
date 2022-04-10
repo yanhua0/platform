@@ -1,10 +1,12 @@
 package com.test.platform.entity;
 
-import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
+
 import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 /**
  * (TestTool)实体类
@@ -18,6 +20,7 @@ public class TestTool{
      * 主键
      */    
     @Column(name = "id")
+    @Id
     private Integer id;
     /**
      * 工具名称
@@ -25,7 +28,7 @@ public class TestTool{
     @Column(name = "tool_name")
     private String toolName;
     /**
-     * 创建时间
+     * 描述
      */    
     @Column(name = "description")
     private String description;

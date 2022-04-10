@@ -2,7 +2,9 @@ package com.test.platform.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -17,6 +19,7 @@ public class TestServer{
      * 主键
      */    
     @Column(name = "id")
+    @Id
     private Integer id;
     /**
      * 服务器名称

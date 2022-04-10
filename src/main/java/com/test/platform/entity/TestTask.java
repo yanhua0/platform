@@ -1,10 +1,12 @@
 package com.test.platform.entity;
 
-import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
+
 import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 /**
  * (TestTask)实体类
@@ -18,6 +20,7 @@ public class TestTask{
      * 主键
      */    
     @Column(name = "id")
+    @Id
     private Integer id;
     /**
      * 任务名称

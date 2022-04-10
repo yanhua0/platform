@@ -16,6 +16,7 @@ public class ExampleUtils {
                     criteria=criteria.andEqualTo(field.getName(),value);
                 }
             }
+            example.orderBy("id").desc();
             return example;
         } catch (IllegalAccessException e) {
             log.error("reflect error",e);

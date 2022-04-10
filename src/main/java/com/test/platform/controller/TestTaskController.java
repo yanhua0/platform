@@ -3,6 +3,7 @@ package com.test.platform.controller;
 import com.test.platform.entity.TestTask;
 import com.test.platform.service.TestTaskService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -12,7 +13,7 @@ import java.util.List;
  * (TestTask)表控制层
  * @since 2022-04-09 13:39:09
  */
-@RestController
+@Controller
 @RequestMapping("testTask")
 public class TestTaskController {
     /**

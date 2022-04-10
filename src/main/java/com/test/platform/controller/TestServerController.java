@@ -2,7 +2,6 @@ package com.test.platform.controller;
 
 import com.test.platform.entity.TestServer;
 import com.test.platform.service.TestServerService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +32,7 @@ public class TestServerController {
     @GetMapping
     public String queryAll(TestServer testServer, Model model) {
         List<TestServer> testServerList = testServerService.queryAll(testServer);
-        model.addAttribute("list",testServerList);
+        model.addAttribute("list", testServerList);
         return "testServer";
     }
 
@@ -55,8 +54,9 @@ public class TestServerController {
      * @return 新增结果
      */
     @PostMapping
-    public ResponseEntity<TestServer> add(TestServer testServer) {
-        return ResponseEntity.ok(this.testServerService.insert(testServer));
+    public String add(TestServer testServer) {
+        testServerService.insert(testServer);
+        return "redirect:/testServer";
     }
 
     /**
@@ -65,9 +65,10 @@ public class TestServerController {
      * @param testServer 实体
      * @return 编辑结果
      */
-    @PutMapping
-    public void edit(TestServer testServer) {
+    @PostMapping("/edit")
+    public String edit(TestServer testServer) {
         this.testServerService.update(testServer);
+        return "redirect:/testServer";
     }
 
     /**
@@ -76,9 +77,10 @@ public class TestServerController {
      * @param id 主键
      * @return 删除是否成功
      */
-    @DeleteMapping
-    public void deleteById(Integer id) {
+    @GetMapping("/delete/{id}")
+    public String deleteById(@PathVariable Integer id) {
         this.testServerService.deleteById(id);
+        return "redirect:/testServer";
     }
 
 }

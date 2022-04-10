@@ -7,10 +7,12 @@ import com.test.platform.utils.ExampleUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
  * (TestTool)表服务实现类
+ *
  * @since 2022-04-09 13:39:09
  */
 @Service("testToolService")
@@ -30,7 +32,8 @@ public class TestToolServiceImpl implements TestToolService {
     }
 
     /**
-     *查询
+     * 查询
+     *
      * @param testTool 筛选条件
      * @return 查询结果
      */
@@ -47,6 +50,7 @@ public class TestToolServiceImpl implements TestToolService {
      */
     @Override
     public TestTool insert(TestTool testTool) {
+        testTool.setCreateTime(new Date());
         this.testToolDao.insert(testTool);
         return testTool;
     }
@@ -70,6 +74,6 @@ public class TestToolServiceImpl implements TestToolService {
      */
     @Override
     public void deleteById(Integer id) {
-       testToolDao.deleteByPrimaryKey(id);
+        testToolDao.deleteByPrimaryKey(id);
     }
 }
