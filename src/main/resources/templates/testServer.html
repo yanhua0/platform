@@ -1,0 +1,50 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+
+        .ho:hover{
+            background: #efb307a6;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+<body>
+<div class="container">
+    <h2>服务器管理</h2>
+    <div class="panel panel-primary">
+
+        <div class="panel-body">
+            <table class="table">
+                <!-- <caption class="name">用户信息</caption> -->
+                <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>服务器名称</th>
+                    <th>IP地址</th>
+                    <th>服务器状态</th>
+                    <th>操作系统</th>
+                    <th>描述</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="server,index:${list}" class="find">
+                    <td th:text="${index.count}"></td>
+                    <td th:text="${server.deviceName}"></td>
+                    <td th:text="${server.ip}"></td>
+                    <td th:text="${server.serverStatus}"></td>
+                    <td th:text="${server.os}"></td>
+                    <td th:text="${server.description}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
