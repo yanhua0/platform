@@ -43,6 +43,7 @@ public class TestServerController {
      * @return 单条数据
      */
     @GetMapping("{id}")
+    @ResponseBody
     public TestServer queryById(@PathVariable("id") Integer id) {
         return this.testServerService.queryById(id);
     }

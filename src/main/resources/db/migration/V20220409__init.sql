@@ -42,7 +42,7 @@ CREATE TABLE test_task_log(
                               task_name VARCHAR(255)    COMMENT '任务名称' ,
                               task_desc VARCHAR(255)    COMMENT '任务描述' ,
                               execute_result VARCHAR(20)    COMMENT '成功，失败' ,
-                              result VARCHAR(255)    COMMENT '接口返回结果' ,
+                              result text    COMMENT '接口返回结果' ,
                               create_time DATETIME    COMMENT '创建时间' ,
                               PRIMARY KEY (id)
 )  COMMENT = '';

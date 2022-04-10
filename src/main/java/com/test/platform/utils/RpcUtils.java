@@ -1,12 +1,14 @@
 package com.test.platform.utils;
 
 import com.alibaba.fastjson.JSONObject;
+import com.test.platform.dto.RestResult;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.TrustStrategy;
+import org.thymeleaf.util.StringUtils;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -22,20 +24,34 @@ import java.security.cert.X509Certificate;
 public class RpcUtils {
     private static RestTemplate REST_TEMPLATE = restTemplateBuild();
 
-    public static ResponseEntity<String> getRes(String url, String method, String reqBody) {
-        JSONObject jsonObject = JSONObject.parseObject(reqBody);
-        if (method.equalsIgnoreCase("GET")) {
-            UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(url);
-            for (String s : jsonObject.keySet()) {
-                Object v = jsonObject.get(s);
-                uriComponentsBuilder.queryParam(s, v);
+    public static RestResult getRes(String url, String method, String reqBody) {
+        RestResult restResult = new RestResult();
+        ResponseEntity<String> responseEntity = null;
+        try {
+            JSONObject jsonObject = null;
+            if (!StringUtils.isEmpty(reqBody)) {
+                jsonObject = JSONObject.parseObject(reqBody);
             }
-            url = uriComponentsBuilder.toUriString();
+            if (method.equalsIgnoreCase("GET")&&jsonObject!=null) {
+                UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(url);
+                for (String s : jsonObject.keySet()) {
+                    Object v = jsonObject.get(s);
+                    uriComponentsBuilder.queryParam(s, v);
+                }
+                url = uriComponentsBuilder.toUriString();
+            }
+            log.info("url={},method={},reqBody={}", url, method, reqBody);
+            responseEntity = REST_TEMPLATE.exchange(url, HttpMethod.resolve(method), new HttpEntity<>(jsonObject), new ParameterizedTypeReference<String>() {
+            });
+        } catch (Exception e) {
+            log.error("rest fail ", e);
+            restResult.setResult(e.getMessage());
+            restResult.setResultMsg("失败");
+            return restResult;
         }
-        log.info("url={},method={},reqBody={}", url, method, reqBody);
-        ResponseEntity<String> responseEntity = REST_TEMPLATE.exchange(url, HttpMethod.resolve(method), new HttpEntity<>(jsonObject), new ParameterizedTypeReference<String>() {
-        });
-        return responseEntity;
+        restResult.setResult(responseEntity.getBody());
+        restResult.setResultMsg("成功");
+        return restResult;
     }
 
 

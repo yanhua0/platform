@@ -3,8 +3,9 @@ package com.test.platform.service.impl;
 import com.test.platform.dao.TestToolDao;
 import com.test.platform.entity.TestTool;
 import com.test.platform.service.TestToolService;
-import com.test.platform.utils.ExampleUtils;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.util.StringUtils;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -39,7 +40,10 @@ public class TestToolServiceImpl implements TestToolService {
      */
     @Override
     public List<TestTool> queryAll(TestTool testTool) {
-        return this.testToolDao.selectByExample(ExampleUtils.getExample(testTool));
+        Example example = new Example(testTool.getClass());
+        if(!StringUtils.isEmpty(testTool.getToolName()))
+        example.createCriteria().andLike("toolName","%"+testTool.getToolName()+"%");
+        return this.testToolDao.selectByExample(example);
     }
 
     /**
