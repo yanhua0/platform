@@ -9,10 +9,10 @@
         <result property="collectStatus" column="collect_status" jdbcType="INTEGER"/>
         <result property="description" column="description" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="waitTime" column="wait_time" jdbcType="INTEGER"/>
         <result property="requestUrl" column="request_url" jdbcType="VARCHAR"/>
         <result property="requestMethod" column="request_method" jdbcType="VARCHAR"/>
         <result property="requestBody" column="request_body" jdbcType="VARCHAR"/>
     </resultMap>
-
 </mapper>
 

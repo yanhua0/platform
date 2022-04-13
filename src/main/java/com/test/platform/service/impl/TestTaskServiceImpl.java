@@ -56,6 +56,8 @@ public class TestTaskServiceImpl implements TestTaskService {
             criteria.andLike("taskName", "%" + testTask.getTaskName() + "%");
         if (testTask.getCollectStatus() != null)
             criteria.andEqualTo("collectStatus", testTask.getCollectStatus());
+        if (!StringUtils.isEmpty(testTask.getTaskStatus()))
+            criteria.andEqualTo("taskStatus", testTask.getTaskStatus());
         return this.testTaskDao.selectByExample(example);
     }
 
@@ -111,7 +113,7 @@ public class TestTaskServiceImpl implements TestTaskService {
     public void startTestTask(Integer id) {
         TestTask testTask = queryById(id);
         log.info("创建任务id={}", id);
-        TaskThread thread = new TaskThread(testTask, this,testTaskLogService);
+        TaskThread thread = new TaskThread(testTask, this, testTaskLogService);
         TASK_THREAD.put(id, thread);
         log.info("任务id={}开始执行", id);
         thread.start();

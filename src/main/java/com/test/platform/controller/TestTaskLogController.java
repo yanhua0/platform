@@ -1,5 +1,6 @@
 package com.test.platform.controller;
 
+import com.test.platform.dto.TestStaticsResDTO;
 import com.test.platform.entity.TestTaskLog;
 import com.test.platform.service.TestTaskLogService;
 import org.springframework.stereotype.Controller;
@@ -59,5 +60,14 @@ public class TestTaskLogController {
         return "redirect:/testTaskLog";
     }
 
+    /**
+     * 统计结果
+     * @return
+     */
+    @GetMapping("/testStatics")
+    @ResponseBody
+    public TestStaticsResDTO testStatics() {
+        return testTaskLogService.statics();
+    }
 }
 

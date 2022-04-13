@@ -9,14 +9,17 @@ import com.test.platform.service.impl.TestTaskServiceImpl;
 import com.test.platform.utils.RpcUtils;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * 任务启动线程
  */
 @Getter
 @Setter
+@Slf4j
 public class TaskThread extends Thread {
     private TestTask testTask;
 
@@ -25,14 +28,23 @@ public class TaskThread extends Thread {
 
     private TestTaskLogService testTaskLogService;
 
-    public TaskThread(TestTask testTask, TestTaskService testTaskService,TestTaskLogService testTaskLogService) {
+    public TaskThread(TestTask testTask, TestTaskService testTaskService, TestTaskLogService testTaskLogService) {
         this.testTask = testTask;
-        this.testTaskService=testTaskService;
-        this.testTaskLogService=testTaskLogService;
+        this.testTaskService = testTaskService;
+        this.testTaskLogService = testTaskLogService;
+        this.setName("thread-" + testTask.getTaskName());
     }
 
     @Override
     public void run() {
+        if (Objects.nonNull(testTask.getWaitTime())) {
+            try {
+                log.info("sleep {} s", testTask.getWaitTime());
+                Thread.sleep(testTask.getWaitTime() * 1000);
+            } catch (InterruptedException e) {
+                log.error("线程异常", e);
+            }
+        }
         String requestUrl = testTask.getRequestUrl();
         String method = testTask.getRequestMethod();
         String reqBody = testTask.getRequestBody();

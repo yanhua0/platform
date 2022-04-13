@@ -64,9 +64,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" data-toggle="dropdown">欢迎使用<span class="caret"></span></a>
-
+                <li><a href="#" data-toggle="dropdown">欢迎使用(<th:block th:text="${session.username}"></th:block>)<span class="caret"></span></a>
                 </li>
+                <li><a href="/logout" target="_top">退出系统</a></li>
             </ul>
         </div>
     </div>
@@ -77,12 +77,12 @@
         <li><a href="/testTool" target="content">测试工具管理<i class="fa fa-chevron-right"></i></a></li>
         <li><a href="/testTask" target="content">测试任务管理<i class="fa fa-chevron-right"></i></a></li>
         <li><a href="/testTaskLog" target="content">测试任务执行结果<i class="fa fa-chevron-right"></i></a></li>
-        <li><a href="/testServer" target="content">测试结果统计<i class="fa fa-chevron-right"></i></a></li>
+        <li><a href="/testStatics" target="content">测试结果统计<i class="fa fa-chevron-right"></i></a></li>
 
     </ul>
 </div>
 <div id="frame">
-    <iframe src="/testTask" frameborder="0" name="content"></iframe>
+    <iframe src="/testServer" frameborder="0" name="content"></iframe>
 </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>

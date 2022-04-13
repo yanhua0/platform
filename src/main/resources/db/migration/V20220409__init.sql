@@ -29,6 +29,7 @@ CREATE TABLE test_task(
                           collect_status INT(11)    COMMENT '收藏状态，0--未收藏，1--收藏' ,
                           description VARCHAR(255)    COMMENT '描述' ,
                           create_time DATETIME    COMMENT '创建时间' ,
+                          wait_time INT(11)    COMMENT '等待时间' ,
                           request_url VARCHAR(255)    COMMENT '请求url' ,
                           request_method VARCHAR(255)    COMMENT '请求方法' ,
                           request_body VARCHAR(255)    COMMENT '请求参数' ,

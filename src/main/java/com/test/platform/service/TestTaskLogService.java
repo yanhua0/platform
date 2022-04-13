@@ -1,5 +1,6 @@
 package com.test.platform.service;
 
+import com.test.platform.dto.TestStaticsResDTO;
 import com.test.platform.entity.TestTaskLog;
 import java.util.List;
 
@@ -48,4 +49,9 @@ public interface TestTaskLogService {
      */
     void deleteById(Integer id);
 
+    /**
+     * 统计
+     * @return
+     */
+    TestStaticsResDTO statics();
 }

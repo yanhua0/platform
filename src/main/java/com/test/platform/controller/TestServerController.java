@@ -15,7 +15,7 @@ import java.util.List;
  * @since 2022-04-09 13:39:09
  */
 @Controller
-@RequestMapping("testServer")
+@RequestMapping("/testServer")
 public class TestServerController {
     /**
      * 服务对象
@@ -38,11 +38,11 @@ public class TestServerController {
 
     /**
      * 通过主键查询单条数据
-     *
+     * 测试使用
      * @param id 主键
      * @return 单条数据
      */
-    @GetMapping("{id}")
+    @GetMapping("/query/{id}")
     @ResponseBody
     public TestServer queryById(@PathVariable("id") Integer id) {
         return this.testServerService.queryById(id);

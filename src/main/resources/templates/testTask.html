@@ -33,6 +33,13 @@
                             <option value="1">收藏</option>
                             <option value="0">未收藏</option>
                         </select>
+                        <label for="">任务状态：</label>
+                        <select class="form-control" name="taskStatus" >
+                            <option value="">请选择</option>
+                            <option value="就绪">就绪</option>
+                            <option value="失败">失败</option>
+                            <option value="成功">成功</option>
+                        </select>
                         <input type="submit" value="查询" class="btn btn-info">
                         <input type="button" class="btn btn-info" value="初始化" id="init">
                     </form>
@@ -45,6 +52,7 @@
                     <th>收藏状态</th>
                     <th>描述</th>
                     <th>创建时间</th>
+                    <th>等待时间(单位秒)</th>
                     <th>请求url</th>
                     <th>请求方法</th>
                     <th>请求参数</th>
@@ -64,6 +72,7 @@
                     </th:block>
                     <td th:text="${task.description}"></td>
                     <td th:text="${#dates.format(task.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+                    <td th:text="${task.waitTime}"></td>
                     <td class="text-center small text-muted" style="width:200px; height:51px; word-wrap:break-word; word-break:break-all" th:text="${task.requestUrl}"></td>
                     <td th:text="${task.requestMethod}"></td>
                     <td th:text="${task.requestBody}"></td>
@@ -110,6 +119,10 @@
                     <div class="form-group">
                         <label for="">描述</label>
                         <input class="form-control" type="text" placeholder="请输入描述" name="description">
+                    </div>
+                    <div class="form-group">
+                        <label for="">等待时间(单位秒)</label>
+                        <input class="form-control" type="text" placeholder="请输入描述" name="waitTime">
                     </div>
                     <div class="form-group">
                         <label for="">请求url</label>
@@ -162,6 +175,10 @@
                     <div class="form-group">
                         <label for="">描述</label>
                         <input class="form-control" type="text" placeholder="请输入描述" name="description">
+                    </div>
+                    <div class="form-group">
+                        <label for="">等待时间(单位秒)</label>
+                        <input class="form-control" type="text" placeholder="请输入描述" name="waitTime">
                     </div>
                     <div class="form-group">
                         <label for="">请求url</label>

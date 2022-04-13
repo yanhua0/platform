@@ -48,6 +48,11 @@ public class TestTask{
     @Column(name = "create_time")
     private Date createTime;
     /**
+     * 等待时间
+     */
+    @Column(name = "wait_time")
+    private Integer waitTime;
+    /**
      * 请求url
      */    
     @Column(name = "request_url")
